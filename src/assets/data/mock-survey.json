@@ -1,9 +1,10 @@
 {
+  "title": "Some test survey",
   "controls": [
     {
       "name": "firstName",
       "label": "First name:",
-      "value": "",
+      "defaultValue": "",
       "type": "text",
       "validators": {
         "required": true,
@@ -13,14 +14,14 @@
     {
       "name": "lastName",
       "label": "Last name:",
-      "value": "",
+      "defaultValue": "",
       "type": "text",
       "validators": {}
     },
     {
       "name": "password",
       "label": "Password",
-      "value": "",
+      "defaultValue": "",
       "type": "password",
       "validators": {
         "required": true,
@@ -31,7 +32,7 @@
     {
       "name": "email",
       "label": "Email",
-      "value": "",
+      "defaultValue": "",
       "type": "email",
       "validators": {
         "required": true,
@@ -41,14 +42,14 @@
     {
       "name": "comments",
       "label": "Comments",
-      "value": "",
+      "defaultValue": "",
       "type": "textarea",
       "validators": {}
     },
     {
       "name": "agreeToTerms",
       "label": "This is a checkbox?",
-      "value": false,
+      "defaultValue": false,
       "type": "checkbox",
       "validators": {
         "requiredTrue": true
@@ -57,7 +58,7 @@
     {
       "name": "size",
       "label": "Range label",
-      "value": 0,
+      "defaultValue": 0,
       "type": "range",
       "options": {
         "min": "0",
@@ -70,8 +71,32 @@
     {
       "name": "lightDark",
       "label": "Do you like toggles?",
-      "value": false,
+      "defaultValue": false,
       "type": "toggle",
+      "validators": {}
+    },
+    {
+      "name": "singleChoice",
+      "label": "Single Choice Question",
+      "defaultValue": "Yes",
+      "choices": [
+        "Yes",
+        "No",
+        "Maybe"
+      ],
+      "type": "radio",
+      "validators": {}
+    },
+    {
+      "name": "multipleChoice",
+      "label": "Multiple choice",
+      "defaultValue": "",
+      "choices": [
+        "Apples",
+        "Oranges",
+        "Bananas"
+      ],
+      "type": "multiple-choice",
       "validators": {}
     }
   ]
