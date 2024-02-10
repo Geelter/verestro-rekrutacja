@@ -1,12 +1,30 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {JsonFormData} from "../../models/json-form-data.interface";
-import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatSlideToggle} from "@angular/material/slide-toggle";
+import {MatSlider, MatSliderThumb} from "@angular/material/slider";
+import {MatCard, MatCardHeader} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatCheckbox,
+    MatSlideToggle,
+    MatSlider,
+    MatSliderThumb,
+    MatCard,
+    MatCardHeader,
+    MatButton
+  ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

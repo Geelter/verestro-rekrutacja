@@ -1,1 +1,60 @@
-<p>dynamic-form works!</p>
+<mat-card>
+  <form [formGroup]="dynamicForm"
+        (ngSubmit)="onSubmit()"
+        class="form"
+  >
+    @for (control of jsonFormData.controls; track control.name) {
+      @if ([
+        'text',
+        'password',
+        'email',
+        'number',
+        'search',
+        'tel',
+        'url'
+      ].includes(control.type)) {
+        <mat-form-field>
+          <mat-label>{{control.label}}</mat-label>
+          <input matInput
+                 matNativeControl
+                 [type]="control.type"
+                 [formControlName]="control.name"
+          >
+        </mat-form-field>
+      }
+      @if (control.type == 'textarea') {
+        <mat-form-field>
+          <mat-label>{{control.label}}</mat-label>
+          <textarea matInput
+                    matNativeControl
+                    [formControlName]="control.name"
+          ></textarea>
+        </mat-form-field>
+      }
+      @if (control.type == 'checkbox') {
+        <mat-checkbox [formControlName]="control.name"
+                      color="primary"
+        >{{control.label}}</mat-checkbox>
+      }
+      @if (control.type == 'toggle') {
+        <mat-slide-toggle [formControlName]="control.name"
+                          color="primary"
+        >{{control.label}}</mat-slide-toggle>
+      }
+      @if (control.type == 'range') {
+        <mat-slider [min]="control.options?.min"
+                    [max]="control.options?.max"
+                    [step]="control.options?.step"
+                    discrete>
+          <input matSliderThumb
+                 [formControlName]="control.name"
+          >
+        </mat-slider>
+      }
+    }
+    <button mat-raised-button
+            color="primary"
+            [disabled]="!dynamicForm.valid"
+    >Submit</button>
+  </form>
+</mat-card>
