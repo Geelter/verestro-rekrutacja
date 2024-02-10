@@ -1,6 +1,18 @@
+.card {
+  padding: 2rem;
+
+  &__header {
+    margin-bottom: 2rem;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
   gap: 2rem;
+}
+
+.single-choice {
+  display: flex;
+  flex-direction: column;
 }
