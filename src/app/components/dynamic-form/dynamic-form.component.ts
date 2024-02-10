@@ -1,6 +1,13 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {JsonFormData} from "../../models/json-form-data.interface";
-import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -38,7 +45,7 @@ export class DynamicFormComponent implements OnInit {
 
   private createForm(formData: JsonFormData) {
     formData.controls.forEach(control => {
-      const validators = [];
+      const validators: ValidatorFn[] = [];
 
       for (const [key, value] of Object.entries(control.validators)) {
         switch (key) {
@@ -74,10 +81,17 @@ export class DynamicFormComponent implements OnInit {
         }
       }
 
-      this.dynamicForm.addControl(
-        control.name,
-        this.formBuilder.control(control.value, validators)
-      );
+      if (control.type == 'multiple-choice') {
+        this.dynamicForm.addControl(
+          control.name,
+          this.formBuilder.control([])
+        )
+      } else {
+        this.dynamicForm.addControl(
+          control.name,
+          this.formBuilder.control(control.defaultValue, validators)
+        );
+      }
     })
   }
 
