@@ -1,6 +1,4 @@
-import {JsonFormData} from "../models/json-form-data.interface";
-
-export const mockSurvey: JsonFormData = {
+{
   "controls": [
     {
       "name": "firstName",
@@ -32,7 +30,7 @@ export const mockSurvey: JsonFormData = {
       "value": "false",
       "type": "checkbox",
       "validators": {
-        requiredTrue: true
+        "requiredTrue": true
       }
     },
     {
