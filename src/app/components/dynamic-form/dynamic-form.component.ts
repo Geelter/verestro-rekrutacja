@@ -13,8 +13,10 @@ import {MatInput} from "@angular/material/input";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {MatSlider, MatSliderThumb} from "@angular/material/slider";
-import {MatCard, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatListOption, MatSelectionList} from "@angular/material/list";
 
 @Component({
   selector: 'app-dynamic-form',
@@ -30,7 +32,13 @@ import {MatButton} from "@angular/material/button";
     MatSliderThumb,
     MatCard,
     MatCardHeader,
-    MatButton
+    MatButton,
+    MatRadioGroup,
+    MatRadioButton,
+    MatSelectionList,
+    MatListOption,
+    MatCardTitle,
+    MatCardContent
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
@@ -44,6 +52,9 @@ export class DynamicFormComponent implements OnInit {
   dynamicForm: FormGroup = this.formBuilder.group({});
 
   private createForm(formData: JsonFormData) {
+    console.log('createForm');
+    console.log(formData);
+
     formData.controls.forEach(control => {
       const validators: ValidatorFn[] = [];
 
