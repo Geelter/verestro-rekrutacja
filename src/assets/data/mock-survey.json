@@ -7,7 +7,7 @@
       "type": "text",
       "validators": {
         "required": true,
-        "minLength": 10
+        "minLength": 4
       }
     },
     {
@@ -18,6 +18,27 @@
       "validators": {}
     },
     {
+      "name": "password",
+      "label": "Password",
+      "value": "",
+      "type": "password",
+      "validators": {
+        "required": true,
+        "minLength": 6,
+        "maxLength": 22
+      }
+    },
+    {
+      "name": "email",
+      "label": "Email",
+      "value": "",
+      "type": "email",
+      "validators": {
+        "required": true,
+        "email": true
+      }
+    },
+    {
       "name": "comments",
       "label": "Comments",
       "value": "",
@@ -25,9 +46,9 @@
       "validators": {}
     },
     {
-      "name": "agreeTerms",
+      "name": "agreeToTerms",
       "label": "This is a checkbox?",
-      "value": "false",
+      "value": false,
       "type": "checkbox",
       "validators": {
         "requiredTrue": true
@@ -35,8 +56,8 @@
     },
     {
       "name": "size",
-      "label": "",
-      "value": "",
+      "label": "Range label",
+      "value": 0,
       "type": "range",
       "options": {
         "min": "0",
@@ -49,7 +70,7 @@
     {
       "name": "lightDark",
       "label": "Do you like toggles?",
-      "value": "false",
+      "value": false,
       "type": "toggle",
       "validators": {}
     }

@@ -18,7 +18,7 @@ interface JsonFormControlOptions {
 interface JsonFormControl {
   name: string;
   label: string;
-  value: string;
+  value: string | number | boolean;
   type: string;
   options?: JsonFormControlOptions;
   validators: JsonFormValidators;
