@@ -18,11 +18,13 @@ interface JsonFormControlOptions {
 interface JsonFormControl {
   name: string;
   label: string;
-  value: string | number | boolean;
+  defaultValue: string | number | boolean;
+  choices?: string[];
   type: string;
   options?: JsonFormControlOptions;
   validators: JsonFormValidators;
 }
 export interface JsonFormData {
+  title: string;
   controls: JsonFormControl[];
 }
