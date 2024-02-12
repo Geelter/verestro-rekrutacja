@@ -1,30 +1,29 @@
-interface JsonFormValidators {
+export interface JsonQuestionValidators {
   min?: number;
   max?: number;
+  minLength?: number;
+  maxLength?: number;
   required?: boolean;
   requiredTrue?: boolean;
   email?: boolean;
-  minLength?: number;
-  maxLength?: number;
   pattern?: string;
   nullValidator?: boolean;
 }
-interface JsonFormControlOptions {
-  min?: string;
-  max?: string;
-  step?: string;
-  icon?: string;
+interface JsonQuestionControlOptions {
+  min?: number;
+  max?: number;
+  step?: number;
 }
-interface JsonFormControl {
-  name: string;
-  label: string;
+export interface JsonSurveyQuestion {
+  questionLabel: string;
+  questionControlName: string;
   defaultValue: string | number | boolean;
-  choices?: string[];
-  type: string;
-  options?: JsonFormControlOptions;
-  validators: JsonFormValidators;
+  questionChoices?: string[];
+  questionType: string;
+  questionControlOptions?: JsonQuestionControlOptions;
+  questionValidators: JsonQuestionValidators;
 }
-export interface JsonFormData {
+export interface JsonSurveyData {
   title: string;
-  controls: JsonFormControl[];
+  questions: JsonSurveyQuestion[];
 }
