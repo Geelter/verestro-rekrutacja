@@ -35,6 +35,10 @@ export class FormEditorComponent {
     questions: new FormArray<FormGroup>([], [Validators.required, Validators.minLength(1)])
   });
 
+  addQuestion() {
+    this.surveyForm.controls.questions.push(this.createQuestion());
+  }
+
   private createQuestion(jsonSurveyQuestion: JsonSurveyQuestion | null = null): FormGroup<QuestionGroup> {
     const newQuestion = new FormGroup<QuestionGroup>({
       questionLabel: new FormControl(
