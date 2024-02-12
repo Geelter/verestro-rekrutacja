@@ -178,4 +178,14 @@ export class FormEditorComponent {
   removeQuestionAt(index: number) {
     this.surveyForm.controls.questions.removeAt(index);
   }
+
+  addChoiceToQuestion(index: number) {
+    this.surveyForm.controls.questions.at(index).controls.questionChoices?.push(
+      new FormControl('', {nonNullable: true, validators: [Validators.required]})
+    )
+  }
+
+  removeChoiceFromQuestion(questionIndex: number, choiceIndex: number) {
+    this.surveyForm.controls.questions.at(questionIndex).controls.questionChoices.removeAt(choiceIndex);
+  }
 }
