@@ -188,4 +188,17 @@ export class FormEditorComponent {
   removeChoiceFromQuestion(questionIndex: number, choiceIndex: number) {
     this.surveyForm.controls.questions.at(questionIndex).controls.questionChoices.removeAt(choiceIndex);
   }
+
+  onSelectQuestionType(questionType: string, questionIndex: number) {
+    this.surveyForm.controls.questions.at(questionIndex).controls.questionChoices.disable();
+    this.surveyForm.controls.questions.at(questionIndex).controls.questionControlOptions.disable();
+
+    if (questionType === 'radio' || questionType === 'multiple-choice') {
+      this.surveyForm.controls.questions.at(questionIndex).controls.questionChoices.enable();
+    }
+
+    if (questionType === 'range') {
+      this.surveyForm.controls.questions.at(questionIndex).controls.questionControlOptions.enable();
+    }
+  }
 }
