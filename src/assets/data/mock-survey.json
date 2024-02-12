@@ -1,103 +1,102 @@
 {
   "title": "Some test survey",
-  "controls": [
+  "questions": [
     {
-      "name": "firstName",
-      "label": "First name:",
+      "questionLabel": "First name:",
+      "questionControlName": "firstName",
       "defaultValue": "",
-      "type": "text",
-      "validators": {
+      "questionType": "text",
+      "questionValidators": {
         "required": true,
         "minLength": 4
       }
     },
     {
-      "name": "lastName",
-      "label": "Last name:",
+      "questionControlName": "lastName",
+      "questionLabel": "Last name:",
       "defaultValue": "",
-      "type": "text",
-      "validators": {}
+      "questionType": "text",
+      "questionValidators": {}
     },
     {
-      "name": "password",
-      "label": "Password",
+      "questionControlName": "password",
+      "questionLabel": "Password",
       "defaultValue": "",
-      "type": "password",
-      "validators": {
+      "questionType": "password",
+      "questionValidators": {
         "required": true,
         "minLength": 6,
         "maxLength": 22
       }
     },
     {
-      "name": "email",
-      "label": "Email",
+      "questionControlName": "email",
+      "questionLabel": "Email",
       "defaultValue": "",
-      "type": "email",
-      "validators": {
+      "questionType": "email",
+      "questionValidators": {
         "required": true,
         "email": true
       }
     },
     {
-      "name": "comments",
-      "label": "Comments",
+      "questionControlName": "comments",
+      "questionLabel": "Comments",
       "defaultValue": "",
-      "type": "textarea",
-      "validators": {}
+      "questionType": "textarea",
+      "questionValidators": {}
     },
     {
-      "name": "agreeToTerms",
-      "label": "This is a checkbox?",
+      "questionControlName": "agreeToTerms",
+      "questionLabel": "This is a checkbox?",
       "defaultValue": false,
-      "type": "checkbox",
-      "validators": {
+      "questionType": "checkbox",
+      "questionValidators": {
         "requiredTrue": true
       }
     },
     {
-      "name": "size",
-      "label": "Range label",
+      "questionControlName": "size",
+      "questionLabel": "Range label",
       "defaultValue": 0,
-      "type": "range",
-      "options": {
-        "min": "0",
-        "max": "100",
-        "step": "1",
-        "icon": "sunny"
+      "questionType": "range",
+      "questionControlOptions": {
+        "min": 0,
+        "max": 100,
+        "step": 1
       },
-      "validators": {}
+      "questionValidators": {}
     },
     {
-      "name": "lightDark",
-      "label": "Do you like toggles?",
+      "questionControlName": "lightDark",
+      "questionLabel": "Do you like toggles?",
       "defaultValue": false,
-      "type": "toggle",
-      "validators": {}
+      "questionType": "toggle",
+      "questionValidators": {}
     },
     {
-      "name": "singleChoice",
-      "label": "Single Choice Question",
+      "questionControlName": "singleChoice",
+      "questionLabel": "Single Choice Question",
       "defaultValue": "Yes",
-      "choices": [
+      "questionChoices": [
         "Yes",
         "No",
         "Maybe"
       ],
-      "type": "radio",
-      "validators": {}
+      "questionType": "radio",
+      "questionValidators": {}
     },
     {
-      "name": "multipleChoice",
-      "label": "Multiple choice",
+      "questionControlName": "multipleChoice",
+      "questionLabel": "Multiple choice",
       "defaultValue": "",
-      "choices": [
+      "questionChoices": [
         "Apples",
         "Oranges",
         "Bananas"
       ],
-      "type": "multiple-choice",
-      "validators": {}
+      "questionType": "multiple-choice",
+      "questionValidators": {}
     }
   ]
 }
