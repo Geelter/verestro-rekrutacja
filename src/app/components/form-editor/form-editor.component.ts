@@ -52,6 +52,7 @@ interface ControlType {
 })
 export class FormEditorComponent implements OnInit {
   @Input() jsonSurveyData: JsonSurveyData | undefined;
+  @Output('onSurveyConfigSubmit') surveyConfigSubmitted = new EventEmitter<JsonSurveyData>();
 
   readonly controlTypes: ControlType[] = [
     {label: 'Text', value: 'text'},
@@ -212,6 +213,41 @@ export class FormEditorComponent implements OnInit {
         [Validators.required, Validators.minLength(1)]
       )
     });
+  }
+
+  private parseSurveyFormValue(): JsonSurveyData {
+    const questions: JsonSurveyQuestion[] = this.surveyForm.value.questions?.map(question => {
+      const validators = question.questionValidators;
+
+      return <JsonSurveyQuestion>{
+        questionLabel: question.questionLabel,
+        questionControlName: question.questionControlName,
+        questionType: question.questionType,
+        questionChoices: question.questionChoices,
+        questionControlOptions: question.questionControlOptions,
+        questionValidators: {
+          min: validators?.min ?? undefined,
+          max: validators?.max ?? undefined,
+          minLength: validators?.minLength ?? undefined,
+          maxLength: validators?.maxLength ?? undefined,
+          required: validators?.required ? true : undefined,
+          requiredTrue: validators?.requiredTrue ? true : undefined,
+          email: validators?.email ? true : undefined,
+          pattern: validators?.pattern ? validators.pattern : undefined,
+          nullValidator: validators?.nullValidator ? true : undefined
+        }
+      }
+    }) ?? [];
+
+    return {
+      title: this.surveyForm.value.title ?? '',
+      questions: questions
+    }
+  }
+
+  onSubmit() {
+    const parsedFormValue = this.parseSurveyFormValue();
+    this.surveyConfigSubmitted.emit(parsedFormValue);
   }
 
   ngOnInit() {
