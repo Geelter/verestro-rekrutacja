@@ -1,1 +1,178 @@
-<p>form-editor works!</p>
+<mat-card class="card">
+  <mat-card-content>
+    <form [formGroup]="surveyForm"
+          (ngSubmit)="onSubmit()"
+          class="form"
+    >
+      <mat-form-field>
+        <mat-label>Survey Title</mat-label>
+        <input matInput
+               matNativeControl
+               type="text"
+               formControlName="title"
+        >
+      </mat-form-field>
+
+      <section formArrayName="questions" class="survey-section">
+        @for (question of surveyForm.controls.questions.controls; let questionIndex = $index; track questionIndex;) {
+          <mat-divider></mat-divider>
+          <div class="question__header">
+            <mat-label>Question {{questionIndex + 1}}</mat-label>
+            <button mat-icon-button
+                    color="primary"
+                    type="button"
+                    (click)="removeQuestionAt(questionIndex)"
+            ><mat-icon>close</mat-icon></button>
+          </div>
+
+          <div [formGroup]="question">
+            <div class="question__metadata">
+              <mat-form-field>
+                <mat-label>Question Title</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="questionLabel"
+                >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Question Control Name</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="questionControlName"
+                >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Question Control Type</mat-label>
+                <mat-select (selectionChange)="onSelectQuestionType($event.value, questionIndex)"
+                            formControlName="questionType"
+                >
+                  @for (type of controlTypes; track type.value) {
+                    <mat-option [value]="type.value">{{type.label}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            @if (['radio', 'multiple-choice'].includes(question.controls.questionType.value)) {
+              <div formArrayName="questionChoices" class="question__choices">
+                <button mat-stroked-button
+                        color="primary"
+                        (click)="addChoiceToQuestion(questionIndex)"
+                        type="button"
+                        class="question__choices--button"
+                >Add Choice</button>
+                @for (choice of question.controls.questionChoices.controls; let choiceIndex = $index; track choiceIndex) {
+                  <div class="question__choices--element">
+                    <mat-form-field>
+                      <mat-label>Question Choice {{choiceIndex + 1}}</mat-label>
+                      <input matInput
+                             matNativeControl
+                             type="text"
+                             [formControl]="choice"
+                      >
+                    </mat-form-field>
+                    <button mat-icon-button
+                            color="primary"
+                            (click)="removeChoiceFromQuestion(questionIndex, choiceIndex)"
+                            type="button"
+                            [disabled]="question.controls.questionChoices.controls.length <= 2"
+                    ><mat-icon>close</mat-icon></button>
+                  </div>
+                }
+              </div>
+            }
+
+            @if (question.controls.questionType.value === 'range') {
+              <div formGroupName="questionControlOptions" class="question__control-options">
+                <mat-form-field>
+                  <mat-label>Range Start</mat-label>
+                  <input matInput
+                         matNativeControl
+                         type="text"
+                         formControlName="min"
+                  >
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Range End</mat-label>
+                  <input matInput
+                         matNativeControl
+                         type="text"
+                         formControlName="max"
+                  >
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Range Step</mat-label>
+                  <input matInput
+                         matNativeControl
+                         type="text"
+                         formControlName="step"
+                  >
+                </mat-form-field>
+              </div>
+            }
+            <div formGroupName="questionValidators" class="question__validators">
+              <mat-label class="question__validators--title">Validators</mat-label>
+              <mat-checkbox formControlName="required"
+                            color="primary"
+              >Required</mat-checkbox>
+              <mat-checkbox formControlName="requiredTrue"
+                            color="primary"
+              >Required True</mat-checkbox>
+              <mat-checkbox formControlName="email"
+                            color="primary"
+              >Email</mat-checkbox>
+              <mat-checkbox formControlName="nullValidator"
+                            color="primary"
+              >Null Validator</mat-checkbox>
+              <mat-form-field>
+                <mat-label>Minimum Value</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="min"
+                >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Maximum Value</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="max"
+                >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Minimum Length</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="minLength"
+                >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Maximum Length</mat-label>
+                <input matInput
+                       matNativeControl
+                       type="text"
+                       formControlName="maxLength"
+                >
+              </mat-form-field>
+            </div>
+          </div>
+        }
+      </section>
+
+      <button mat-stroked-button
+              color="primary"
+              (click)="addQuestion()"
+              type="button"
+      >Add Question</button>
+
+      <button mat-raised-button
+              color="primary"
+              [disabled]="!surveyForm.valid"
+      >Save Survey</button>
+    </form>
+  </mat-card-content>
+</mat-card>
