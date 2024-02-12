@@ -12,6 +12,10 @@ export class SupabaseAuthService {
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
 
+  private readonly SNACKBAR_DURATION = 3000;
+  private readonly SNACKBAR_VERTICAL_POSITION = 'bottom';
+  private readonly SNACKBAR_HORIZONTAL_POSITION = 'center';
+
   async getSession() {
     const data = await this.supabase.client.auth.getSession();
 
@@ -24,9 +28,9 @@ export class SupabaseAuthService {
 
     if (error) {
       this.snackBar.open(error.message, '', {
-        duration: 3000,
-        horizontalPosition: "end",
-        verticalPosition: "top"
+        duration: this.SNACKBAR_DURATION,
+        horizontalPosition: this.SNACKBAR_HORIZONTAL_POSITION,
+        verticalPosition: this.SNACKBAR_VERTICAL_POSITION
       });
       return;
     }
@@ -39,9 +43,9 @@ export class SupabaseAuthService {
 
     if (error) {
       this.snackBar.open(error.message, '', {
-        duration: 3000,
-        horizontalPosition: "end",
-        verticalPosition: "top"
+        duration: this.SNACKBAR_DURATION,
+        horizontalPosition: this.SNACKBAR_HORIZONTAL_POSITION,
+        verticalPosition: this.SNACKBAR_VERTICAL_POSITION
       });
       return;
     }
