@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
-import {JsonFormData} from "../../models/json-form-data.interface";
+import {JsonSurveyData} from "../../models/json-form-data.interface";
 import {
   AbstractControl,
   FormBuilder,
@@ -45,20 +45,20 @@ import {MatListOption, MatSelectionList} from "@angular/material/list";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent implements OnInit {
-  @Input({required: true}) jsonFormData!: JsonFormData;
+  @Input({required: true}) jsonFormData!: JsonSurveyData;
   @Output() formSubmitted = new EventEmitter<AbstractControl>();
 
   private readonly formBuilder = inject(FormBuilder);
   dynamicForm: FormGroup = this.formBuilder.group({});
 
-  private createForm(formData: JsonFormData) {
+  private createForm(formData: JsonSurveyData) {
     console.log('createForm');
     console.log(formData);
 
-    formData.controls.forEach(control => {
+    formData.questions.forEach(control => {
       const validators: ValidatorFn[] = [];
 
-      for (const [key, value] of Object.entries(control.validators)) {
+      for (const [key, value] of Object.entries(control.questionValidators)) {
         switch (key) {
           case 'min':
             validators.push(Validators.min(value));
@@ -92,14 +92,14 @@ export class DynamicFormComponent implements OnInit {
         }
       }
 
-      if (control.type == 'multiple-choice') {
+      if (control.questionType == 'multiple-choice') {
         this.dynamicForm.addControl(
-          control.name,
+          control.questionControlName,
           this.formBuilder.control([])
         )
       } else {
         this.dynamicForm.addControl(
-          control.name,
+          control.questionControlName,
           this.formBuilder.control(control.defaultValue, validators)
         );
       }
