@@ -50,7 +50,9 @@ interface ControlType {
   templateUrl: './form-editor.component.html',
   styleUrl: './form-editor.component.scss'
 })
-export class FormEditorComponent {
+export class FormEditorComponent implements OnInit {
+  @Input() jsonSurveyData: JsonSurveyData | undefined;
+
   readonly controlTypes: ControlType[] = [
     {label: 'Text', value: 'text'},
     {label: 'Password', value: 'password'},
@@ -199,6 +201,22 @@ export class FormEditorComponent {
 
     if (questionType === 'range') {
       this.surveyForm.controls.questions.at(questionIndex).controls.questionControlOptions.enable();
+    }
+  }
+
+  private parseJsonFormData(formData: JsonSurveyData): FormGroup<SurveyForm> {
+    return new FormGroup({
+      title: new FormControl(formData.title, {nonNullable: true, validators: [Validators.required]}),
+      questions: new FormArray(
+        formData.questions.map(formDataQuestion => this.createQuestion(formDataQuestion)),
+        [Validators.required, Validators.minLength(1)]
+      )
+    });
+  }
+
+  ngOnInit() {
+    if (this.jsonSurveyData) {
+      this.surveyForm = this.parseJsonFormData(this.jsonSurveyData);
     }
   }
 }
