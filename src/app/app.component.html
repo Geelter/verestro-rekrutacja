@@ -57,26 +57,38 @@
   }
 
 <mat-toolbar class="navbar" color="primary">
-  @if (true) {
-    <button mat-flat-button color="primary">
+  @if (isUserAuthenticated) {
+    <button mat-flat-button
+            color="primary"
+            routerLink="/admin/surveys"
+    >
       Surveys
     </button>
-    <button mat-flat-button color="primary">
+    <button mat-flat-button
+            color="primary"
+            routerLink="/admin/submissions"
+    >
       Submissions
     </button>
     <button mat-flat-button color="primary" class="navbar__auth-button">
       Log Out
     </button>
   } @else {
-    <button mat-flat-button color="primary">
+    <button mat-flat-button
+            color="primary"
+            routerLink="/surveys"
+    >
       Surveys
     </button>
-    <button mat-flat-button color="primary" class="navbar__auth-button">
-      Log In
+    <button mat-flat-button
+            color="primary"
+            class="navbar__auth-button"
+            (click)="onSignIn()"
+    >
+      Sign In
     </button>
   }
 </mat-toolbar>
 <section>
-<!--  <router-outlet></router-outlet>-->
-  <app-auth></app-auth>
+  <router-outlet></router-outlet>
 </section>
