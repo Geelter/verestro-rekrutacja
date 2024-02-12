@@ -28,4 +28,10 @@ export class FormEditorComponent {
     {label: 'Single Choice', value: 'radio'},
     {label: 'Multiple Choice', value: 'multiple-choice'},
   ];
+
+  // Default form state
+  surveyForm = new FormGroup<SurveyForm>({
+    title: new FormControl('New Survey', {nonNullable: true, validators: [Validators.required]}),
+    questions: new FormArray<FormGroup>([], [Validators.required, Validators.minLength(1)])
+  });
 }
