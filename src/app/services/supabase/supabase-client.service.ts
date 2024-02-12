@@ -10,7 +10,7 @@ const options = {
 };
 
 const supabaseUrl = 'https://crjaywdqkcpvqooaxgbq.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnaGh4aWhkenVkZ2pvbWtvbW9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEyNTUyMDUsImV4cCI6MjAxNjgzMTIwNX0.KyJbFm3PiEElGo2zhZNApe4UsuBatazCeqEX4w3Fxdk';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyamF5d2Rxa2NwdnFvb2F4Z2JxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDc1MjUzODQsImV4cCI6MjAyMzEwMTM4NH0.1B9tuzp1HsMiCbWAeXMvMsGxnPV1_syc2lm38YFG8oo';
 
 @Injectable({
   providedIn: 'root'
