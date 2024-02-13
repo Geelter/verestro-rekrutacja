@@ -70,22 +70,6 @@ export class SupabaseDatabaseService {
     )
   }
 
-  submitSurveyAnswers(surveyID: number, surveyAnswers: {question: string, answer: unknown}[]) {
-    return from(
-      this.supabase.client
-        .from('submittedSurveys')
-        .insert({survey_id: surveyID, answers: surveyAnswers})
-    ).pipe(
-      switchMap((result) => {
-        if (result.error) {
-          this.showSnackBar(result.error.message);
-          return throwError(() => new Error(result.error.message));
-        }
-        return of(null);
-      })
-    )
-  }
-
   createSurvey(surveyData: JsonSurveyData) {
     return from(
       this.supabase.client
@@ -136,6 +120,57 @@ export class SupabaseDatabaseService {
         return of(null);
       }),
       retry({ count: 2, delay: 1000 })
+    )
+  }
+
+  fetchSurveyAnswersFor(surveyID: number) {
+    return from(
+      this.supabase.client
+        .from('submittedSurveys')
+        .select()
+        .eq('survey_id', surveyID)
+        .returns<Tables<'submittedSurveys'>[]>()
+    ).pipe(
+      switchMap((result) => {
+        if (result.error) {
+          this.showSnackBar(result.error.message);
+          return throwError(() => new Error(result.error.message));
+        }
+        const surveyAnswers = result.data.map(
+          (value) => {
+            return {
+              id: value.id,
+              answers: value.answers!.valueOf()
+            }
+          }
+        );
+        return of(result.data);
+      })
+    )
+  }
+
+  submitSurveyAnswers(surveyID: number, surveyAnswers: {question: string, answer: unknown}[]) {
+    return from(
+      this.supabase.client
+        .from('submittedSurveys')
+        .insert({survey_id: surveyID, answers: surveyAnswers})
+    ).pipe(
+      switchMap((result) => {
+        if (result.error) {
+          this.showSnackBar(result.error.message);
+          return throwError(() => new Error(result.error.message));
+        }
+        return of(null);
+      })
+    )
+  }
+
+  deleteSurveyAnswersFor(id: number) {
+    return from(
+      this.supabase.client
+        .from('submittedSurveys')
+        .delete()
+        .eq('id', id)
     )
   }
 
