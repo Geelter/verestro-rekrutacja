@@ -13,6 +13,7 @@
         @if (hasSession$ | async) {
           <button mat-raised-button
                   color="accent"
+                  (click)="onSeeSubmissions(survey.id)"
           >See Submissions</button>
           <button mat-raised-button
                   color="accent"
