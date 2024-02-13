@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {JsonSurveyQuestion, JsonSurveyData} from "../../models/json-form-data.interface";
+import {JsonSurveyQuestion, JsonSurveyData} from "../../../models/json-form-data.interface";
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
@@ -13,7 +13,7 @@ import {MatSlider, MatSliderThumb} from "@angular/material/slider";
 import {MatDivider} from "@angular/material/divider";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatIcon} from "@angular/material/icon";
-import {SurveyForm, QuestionGroup, QuestionControlOptionsGroup, QuestionValidatorsGroup} from "../../models/survey-form.interface";
+import {SurveyForm, QuestionGroup, QuestionControlOptionsGroup, QuestionValidatorsGroup} from "../../../models/survey-form.interface";
 
 interface ControlType {
   label: string,

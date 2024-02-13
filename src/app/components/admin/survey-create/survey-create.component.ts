@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormEditorComponent} from "../../form-editor/form-editor.component";
+import {FormEditorComponent} from "../form-editor/form-editor.component";
 import {JsonSurveyData} from "../../../models/json-form-data.interface";
 import {SupabaseDatabaseService} from "../../../services/supabase/supabase-database.service";
 import {take} from "rxjs";
