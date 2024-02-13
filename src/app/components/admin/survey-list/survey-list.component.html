@@ -1,0 +1,24 @@
+<button mat-raised-button
+        color="accent"
+        (click)="onCreateSurvey()"
+        class="create-button"
+>Create Survey</button>
+
+@if (surveyMetadata) {
+  <section class="survey-previews">
+    @for(survey of surveyMetadata; track survey.id) {
+      <app-survey-preview-card [surveyTitle]="survey.title">
+        <button mat-raised-button
+                color="accent"
+        >See Submissions</button>
+        <button mat-raised-button
+                color="accent"
+        >Edit</button>
+        <button mat-raised-button
+                color="warn"
+                (click)="showDeleteDialogFor(survey.id)"
+        >Delete</button>
+      </app-survey-preview-card>
+    }
+  </section>
+}
