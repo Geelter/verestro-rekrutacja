@@ -1,0 +1,24 @@
+@if (surveySubmissions) {
+  @for(submission of surveySubmissions; track submission.id) {
+    <mat-card class="submission">
+      <mat-card-header>
+        <button mat-icon-button
+                color="primary"
+                type="button"
+                (click)="showDeleteDialogFor(submission.id)"
+        ><mat-icon>close</mat-icon></button>
+      </mat-card-header>
+      <mat-card-content>
+        @for(answer of submission.answers; track $index) {
+          <h2>{{answer.question}}</h2>
+          <p>{{answer.answer}}</p>
+          <mat-divider></mat-divider>
+        }
+      </mat-card-content>
+    </mat-card>
+  } @empty {
+    <mat-card>
+      <mat-card-content>No submissions for this survey</mat-card-content>
+    </mat-card>
+  }
+}
