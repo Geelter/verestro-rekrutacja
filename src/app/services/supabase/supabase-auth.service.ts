@@ -27,33 +27,33 @@ export class SupabaseAuthService {
       await this.supabase.client.auth.signInWithPassword({ email: email, password: password});
 
     if (error) {
-      this.snackBar.open(error.message, '', {
-        duration: this.SNACKBAR_DURATION,
-        horizontalPosition: this.SNACKBAR_HORIZONTAL_POSITION,
-        verticalPosition: this.SNACKBAR_VERTICAL_POSITION
-      });
+      this.showSnackBar(error.message);
       return;
     }
 
-    // this.router.navigate(['/browser']);
+    this.router.navigate(['/admin']);
   }
 
   async signOut() {
     const { error } = await this.supabase.client.auth.signOut();
 
     if (error) {
-      this.snackBar.open(error.message, '', {
-        duration: this.SNACKBAR_DURATION,
-        horizontalPosition: this.SNACKBAR_HORIZONTAL_POSITION,
-        verticalPosition: this.SNACKBAR_VERTICAL_POSITION
-      });
+      this.showSnackBar(error.message);
       return;
     }
 
-    // this.router.navigate(['/auth', 'signin']);
+    this.router.navigate(['/auth']);
   }
 
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return this.supabase.client.auth.onAuthStateChange(callback);
+  }
+
+  private showSnackBar(message: string) {
+    this.snackBar.open(message, '', {
+      duration: this.SNACKBAR_DURATION,
+      horizontalPosition: this.SNACKBAR_HORIZONTAL_POSITION,
+      verticalPosition: this.SNACKBAR_VERTICAL_POSITION
+    })
   }
 }
