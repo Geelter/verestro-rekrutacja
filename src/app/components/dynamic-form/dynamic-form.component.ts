@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {JsonSurveyData} from "../../models/json-form-data.interface";
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -45,8 +44,8 @@ import {MatListOption, MatSelectionList} from "@angular/material/list";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DynamicFormComponent implements OnInit {
-  @Input({required: true}) jsonFormData!: JsonSurveyData;
-  @Output() formSubmitted = new EventEmitter<AbstractControl>();
+  @Input({required: true}) jsonSurveyData!: JsonSurveyData;
+  @Output() surveySubmitted = new EventEmitter<{question: string, answer: unknown}[]>();
 
   private readonly formBuilder = inject(FormBuilder);
   dynamicForm: FormGroup = this.formBuilder.group({});
@@ -107,10 +106,21 @@ export class DynamicFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.formSubmitted.emit(this.dynamicForm.value);
+    this.surveySubmitted.emit(this.parseSurveyAnswers())
+  }
+
+  private parseSurveyAnswers() {
+    const formEntries = Object.values(this.dynamicForm.value);
+
+    return  this.jsonSurveyData.questions.map((question, index) => {
+      return {
+        question: question.questionLabel,
+        answer: formEntries[index]
+      }
+    })
   }
 
   ngOnInit() {
-    this.createForm(this.jsonFormData);
+    this.createForm(this.jsonSurveyData);
   }
 }

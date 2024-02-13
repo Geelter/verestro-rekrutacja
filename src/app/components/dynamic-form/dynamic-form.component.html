@@ -1,13 +1,13 @@
 <mat-card class="card">
   <mat-card-header class="card__header">
-    <mat-card-title>{{jsonFormData.title}}</mat-card-title>
+    <mat-card-title>{{jsonSurveyData.title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="dynamicForm"
           (ngSubmit)="onSubmit()"
           class="form"
     >
-      @for (question of jsonFormData.questions; track questionIndex; let questionIndex = $index) {
+      @for (question of jsonSurveyData.questions; track questionIndex; let questionIndex = $index) {
         <mat-label>{{questionIndex + 1}}. {{question.questionLabel}}</mat-label>
         @if ([
           'text',
