@@ -19,7 +19,6 @@ import {
         MatDialogTitle
     ],
   templateUrl: './delete-submission-dialog.component.html',
-  styleUrl: './delete-submission-dialog.component.scss'
 })
 export class DeleteSubmissionDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<DeleteSubmissionDialogComponent>);
