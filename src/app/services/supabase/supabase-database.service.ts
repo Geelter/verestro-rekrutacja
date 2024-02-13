@@ -144,7 +144,7 @@ export class SupabaseDatabaseService {
             }
           }
         );
-        return of(result.data);
+        return of(surveyAnswers);
       })
     )
   }
