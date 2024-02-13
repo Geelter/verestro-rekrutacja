@@ -47,6 +47,7 @@ export class SupabaseDatabaseService {
       this.supabase.client
         .from('surveys')
         .select()
+        .eq('id', id)
         .returns<Tables<'surveys'>[]>()
     ).pipe(
       switchMap((result) => {

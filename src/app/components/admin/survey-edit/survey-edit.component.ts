@@ -14,7 +14,6 @@ import {catchError, map, switchMap, take, throwError} from "rxjs";
     AsyncPipe
   ],
   templateUrl: './survey-edit.component.html',
-  styleUrl: './survey-edit.component.scss'
 })
 export class SurveyEditComponent {
   private readonly databaseService = inject(SupabaseDatabaseService);
