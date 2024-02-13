@@ -34,6 +34,10 @@ export class SurveyListComponent implements OnInit {
     this.router.navigate(['/admin', 'surveys', 'create']);
   }
 
+  onEditSurvey(surveyID: number) {
+    this.router.navigate(['/admin', 'surveys', 'edit', surveyID]);
+  }
+
   showDeleteDialogFor(surveyID: number) {
     this.dialog.open(DeleteSurveyDialogComponent, {
       width: '250px'
