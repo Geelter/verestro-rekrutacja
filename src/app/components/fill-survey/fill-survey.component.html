@@ -1,0 +1,5 @@
+@if (surveyData$ | async; as surveyData) {
+  <app-dynamic-form [jsonSurveyData]="surveyData.jsonSurveyData"
+                    (surveySubmitted)="onSurveySubmitted(surveyData.id, $event)"
+  ></app-dynamic-form>
+}
