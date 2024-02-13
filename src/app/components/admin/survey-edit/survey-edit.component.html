@@ -1,0 +1,5 @@
+@if (surveyData$ | async; as surveyData) {
+  <app-form-editor [jsonSurveyData]="surveyData.jsonSurveyData"
+                   (onSurveyConfigSubmit)="surveyConfigSubmitted(surveyData.id, $event)"
+  ></app-form-editor>
+}
