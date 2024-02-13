@@ -140,7 +140,7 @@ export class SupabaseDatabaseService {
           (value) => {
             return {
               id: value.id,
-              answers: value.answers!.valueOf()
+              answers: value.answers!.valueOf() as {question: string; answer: string}[]
             }
           }
         );
@@ -171,6 +171,14 @@ export class SupabaseDatabaseService {
         .from('submittedSurveys')
         .delete()
         .eq('id', id)
+    ).pipe(
+      switchMap((result) => {
+        if (result.error) {
+          this.showSnackBar(result.error.message);
+          return throwError(() => new Error(result.error.message));
+        }
+        return of(null);
+      })
     )
   }
 
