@@ -1,14 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {SupabaseDatabaseService} from "../../../services/supabase/supabase-database.service";
+import {SupabaseDatabaseService} from "../../services/supabase/supabase-database.service";
 import {MatButton} from "@angular/material/button";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AsyncPipe} from "@angular/common";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {MatLabel} from "@angular/material/form-field";
-import {filter, switchMap, take} from "rxjs";
-import {SurveyPreviewCardComponent} from "../../survey-preview-card/survey-preview-card.component";
+import {filter, map, switchMap, take} from "rxjs";
+import {SurveyPreviewCardComponent} from "../survey-preview-card/survey-preview-card.component";
 import {MatDialog} from "@angular/material/dialog";
-import {DeleteSurveyDialogComponent} from "../../delete-survey-dialog/delete-survey-dialog.component";
+import {DeleteSurveyDialogComponent} from "../delete-survey-dialog/delete-survey-dialog.component";
 
 @Component({
   selector: 'app-survey-list',
@@ -25,10 +25,15 @@ import {DeleteSurveyDialogComponent} from "../../delete-survey-dialog/delete-sur
 })
 export class SurveyListComponent implements OnInit {
   private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly databaseService = inject(SupabaseDatabaseService);
   private readonly dialog = inject(MatDialog);
 
   surveyMetadata: {id: number, title: string}[] | undefined;
+
+  readonly hasSession$ = this.activatedRoute.data.pipe(
+    map(data => data['hasSession'] as boolean)
+  )
 
   onCreateSurvey() {
     this.router.navigate(['/admin', 'surveys', 'create']);
@@ -36,6 +41,10 @@ export class SurveyListComponent implements OnInit {
 
   onEditSurvey(surveyID: number) {
     this.router.navigate(['/admin', 'surveys', 'edit', surveyID]);
+  }
+
+  onFillSurvey(surveyID: number) {
+    this.router.navigate(['/surveys', 'fill', surveyID]);
   }
 
   showDeleteDialogFor(surveyID: number) {
