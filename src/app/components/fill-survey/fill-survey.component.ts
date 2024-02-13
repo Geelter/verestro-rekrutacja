@@ -13,7 +13,6 @@ import {DynamicFormComponent} from "../dynamic-form/dynamic-form.component";
     DynamicFormComponent
   ],
   templateUrl: './fill-survey.component.html',
-  styleUrl: './fill-survey.component.scss'
 })
 export class FillSurveyComponent {
   private readonly databaseService = inject(SupabaseDatabaseService);
